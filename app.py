@@ -32,7 +32,20 @@ __  __        _ _        ___                        _____         _ _
         print("""Copyright 2020-""" + str(datetime.now().year) + """, Douglas Parker
 https://www.douglas-parker.com, https://git.douglas-parker.com/douglasparker\n""")
         
-        if(sys.argv[1] == "stats"):
+        if(len(sys.argv) <= 1 or sys.argv[1] == "--help" or sys.argv[1] == "-h"):
+            print(f"""
+{self.name}: {self.description}
+
+usage: {os.path.basename(sys.argv[0])} <service> <--argument, -a>
+
+{os.path.basename(sys.argv[0])} stats --application, -a plex,emby,jellyfin    Output statistics about your media library
+{os.path.basename(sys.argv[0])} repair --repair-file-permissions              Repair file permissions for your media library
+{os.path.basename(sys.argv[0])} --version, -V                                 Output the {self.name} version number.
+{os.path.basename(sys.argv[0])} --help, -h                                    Output this help message.
+""")
+            sys.exit(0)
+
+        elif(sys.argv[1] == "stats"):
             stats().get_stats(PATH_LIBRARY_DB, self.verbose)
             sys.exit(0)
         
@@ -45,18 +58,6 @@ https://www.douglas-parker.com, https://git.douglas-parker.com/douglasparker\n""
 
             else:
                 print(sys.argv[2] + " is not a valid argument for the repair module.")
-
-        elif(len(sys.argv) <= 1 or sys.argv[1] == "--help" or sys.argv[1] == "-h"):
-            print(f"""
-{self.name}: {self.description}
-
-usage: {os.path.basename(sys.argv[0])} <service> <--argument, -a>
-
-{os.path.basename(sys.argv[0])} stats --application, -a plex,emby,jellyfin    Output statistics about your media library
-{os.path.basename(sys.argv[0])} repair --repair-file-permissions              Repair file permissions for your media library
-{os.path.basename(sys.argv[0])} --version, -V                                 Output the {self.name} version number.
-{os.path.basename(sys.argv[0])} --help, -h                                    Output this help message.
-""")
-            sys.exit(1)
+                sys.exit(1)
 
 application().main()
