@@ -4,10 +4,8 @@ import argparse
 # from colorama import init, Fore, Back, Style
 from datetime import datetime
 import locale
-from modules.stats import stats
-import os
-import sqlite3
 import sys
+from modules.core import repair, stats
 
 PATH_LIBRARY_DB = "/var/lib/plexmediaserver/Library/Application Support/Plex Media Server/Plug-in Support/Databases/com.plexapp.plugins.library.db"
 
@@ -44,6 +42,9 @@ class application:
             else:
                 print("There was an error when using this module.")
                 sys.exit(1)
+        
+        elif(args.module == "repair"):
+            repair().file_permissions()
 
         else:
             print(args.module + " is not a valid module.")

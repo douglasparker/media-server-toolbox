@@ -1,8 +1,7 @@
-import argparse
 import locale
-import sqlite3
 import os
-import sys
+import sqlite3
+import subprocess
 
 class stats:
     def get_stats(self, args, PATH_LIBRARY_DB):
@@ -71,3 +70,25 @@ class stats:
             
         conn.close()
         return 1
+
+class repair:
+    def file_permissions(self):
+        libraries = [
+            "/storage/media/movies",
+            "/storage/media/tv-shows",
+            "/storage/media/anime",
+            "/storage/media/music",
+            "/storage/media/books",
+        ]
+        for library in libraries:
+            if(os.path.exists(library)):
+                command = "find " + library + " -type d -exec chmod 775 {} \;"
+                subprocess.call(command, shell=True)
+
+                command = "find " + library + " -type f -exec chmod 664 {} \;"
+                subprocess.call(command, shell=True)
+            
+            else:
+                print("The library: " + library + " doesn't exist on the file system.")
+
+repair().file_permissions()
