@@ -29,7 +29,8 @@ class application:
         parser = argparse.ArgumentParser(description="Media Server Toolbox provides a set of utilities that are useful for maintaining your media server.", formatter_class=argparse.RawTextHelpFormatter)
         parser.add_argument("module", type=str, help="""The module that you'd like to run from the toolbox.
 
-        stats - Output statistics about your media library""")
+stats - Output statistics about your media library
+repair - Repair file permissions for your media library""")
         parser.add_argument("-a", "--application", metavar="{PLEX,EMBY,JELLYFIN}", type=str, default="plex", choices=["plex", "emby", "jellyfin"], help="Choose the media server you want to pull data from.")
         parser.add_argument("-t", "--test", metavar="BOOL", type=bool, default=True, help="This is just a argument for debugging purposes.")
         parser.add_argument("-v", "--verbose", action="store_true", help="Enable verbose output for more technical information.")
