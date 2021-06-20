@@ -12,9 +12,12 @@ PATH_LIBRARY_DB = "/var/lib/plexmediaserver/Library/Application Support/Plex Med
 class application:
     name = "Media Server Toolbox"
     description = "{self.name} provides a set of utilities that are useful for maintaining your media server."
+    verbose = False
     def __init__(self):
         locale.setlocale(locale.LC_ALL, '')
         # init() # Initializes colorama
+        for v in sys.argv:
+            if(v == "--verbose" or v == "-v"): self.verbose = True
 
     def main(self):
         print(r"""
@@ -29,16 +32,20 @@ __  __        _ _        ___                        _____         _ _
 https://www.douglas-parker.com, https://git.douglas-parker.com/douglasparker\n""")
         
         if(sys.argv[1] == "stats"):
-            if(stats().get_stats(args, PATH_LIBRARY_DB)):
-                sys.exit(0)
-            else:
-                print("There was an error when using this module.")
-                sys.exit(1)
+            stats().get_stats(PATH_LIBRARY_DB, self.verbose)
+            sys.exit(0)
         
         elif(sys.argv[1] == "repair"):
-            repair().file_permissions()
+            if(len(sys.argv) <= 2):
+                print("You need to pass an argument to use the repair module.")
 
-        elif(len(sys.argv) < 2 or sys.argv[1] == "--help" or sys.argv[1] == "-h"):
+            elif(sys.argv[2] == "--repair-file-permissions"):
+                repair().file_permissions()
+
+            else:
+                print(sys.argv[2] + " is not a valid argument for the repair module.")
+
+        elif(len(sys.argv) <= 1 or sys.argv[1] == "--help" or sys.argv[1] == "-h"):
             print(f"""
 {self.name}: {self.description}
 
@@ -50,5 +57,5 @@ usage: {sys.argv[0]} <service> <--argument, -a>
 {sys.argv[0]} --help, -h                                    Output this help message.
 """)
             sys.exit(1)
-
+            
 application().main()

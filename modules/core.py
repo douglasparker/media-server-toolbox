@@ -4,7 +4,7 @@ import sqlite3
 import subprocess
 
 class stats:
-    def get_stats(self, args, PATH_LIBRARY_DB):
+    def get_stats(self, PATH_LIBRARY_DB, VERBOSE = False):
         if(os.path.exists(PATH_LIBRARY_DB) == False):
             if(os.path.exists(os.path.basename(PATH_LIBRARY_DB))):
                 PATH_LIBRARY_DB = os.path.basename(PATH_LIBRARY_DB)
@@ -61,7 +61,7 @@ class stats:
         db.execute("select count(*) from metadata_items meta join media_items media on media.metadata_item_id = meta.id join media_parts part on part.media_item_id = media.id where part.extra_data not like '%deepAnalysisVersion=4%' and meta.metadata_type in (1, 4, 12) and part.file != '';")
         print(str(locale.format_string("%d", db.fetchone()[0], grouping=True)) + " files missing deep analysation info.\n")
 
-        if(args.verbose):
+        if(VERBOSE):
             print("Report for Missing Deep Analysation Info:")
             print("-----------------------------------------")
             db.execute("select meta.id,title from metadata_items meta join media_items media on media.metadata_item_id = meta.id join media_parts part on part.media_item_id = media.id where part.extra_data not like '%deepAnalysisVersion=4%' and meta.metadata_type in (1, 4, 12) and part.file != '';")
