@@ -4,6 +4,7 @@ import argparse
 # from colorama import init, Fore, Back, Style
 from datetime import datetime
 import locale
+import os
 import sys
 from modules.core import repair, stats
 
@@ -49,13 +50,13 @@ https://www.douglas-parker.com, https://git.douglas-parker.com/douglasparker\n""
             print(f"""
 {self.name}: {self.description}
 
-usage: {sys.argv[0]} <service> <--argument, -a>
+usage: {os.path.basename(sys.argv[0])} <service> <--argument, -a>
 
-{sys.argv[0]} stats --application, -a plex,emby,jellyfin    Output statistics about your media library
-{sys.argv[0]} repair --repair-file-permissions              Repair file permissions for your media library
-{sys.argv[0]} --version, -V                                 Output the {self.name} version number.
-{sys.argv[0]} --help, -h                                    Output this help message.
+{os.path.basename(sys.argv[0])} stats --application, -a plex,emby,jellyfin    Output statistics about your media library
+{os.path.basename(sys.argv[0])} repair --repair-file-permissions              Repair file permissions for your media library
+{os.path.basename(sys.argv[0])} --version, -V                                 Output the {self.name} version number.
+{os.path.basename(sys.argv[0])} --help, -h                                    Output this help message.
 """)
             sys.exit(1)
-            
+
 application().main()
