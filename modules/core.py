@@ -90,5 +90,3 @@ class repair:
             
             else:
                 print("The library: " + library + " doesn't exist on the file system.")
-
-repair().file_permissions()
