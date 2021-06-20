@@ -10,6 +10,8 @@ from modules.core import repair, stats
 PATH_LIBRARY_DB = "/var/lib/plexmediaserver/Library/Application Support/Plex Media Server/Plug-in Support/Databases/com.plexapp.plugins.library.db"
 
 class application:
+    name = "Media Server Toolbox"
+    description = "{self.name} provides a set of utilities that are useful for maintaining your media server."
     def __init__(self):
         locale.setlocale(locale.LC_ALL, '')
         # init() # Initializes colorama
@@ -47,8 +49,17 @@ repair - Repair file permissions for your media library""")
         elif(args.module == "repair"):
             repair().file_permissions()
 
-        else:
-            print(args.module + " is not a valid module.")
+        elif(len(sys.argv) < 2 or sys.argv[1] == "--help" or sys.argv[1] == "-h"):
+            print(f"""
+{self.name}: {self.description}
+
+usage: {sys.argv[0]} <service> <--argument, -a>
+
+{sys.argv[0]} stats                                         Output statistics about your media library
+{sys.argv[0]} repair                                        Repair file permissions for your media library
+{sys.argv[0]} --version, -V                                 Output the {self.name} version number.
+{sys.argv[0]} --help, -h                                    Output this help message.
+""")
             sys.exit(1)
 
 application().main()
