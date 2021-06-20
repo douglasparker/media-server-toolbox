@@ -26,27 +26,16 @@ class application:
         """)
         print("Media Server Toolbox")
         print("""Copyright 2020-""" + str(datetime.now().year) + """, Douglas Parker
-        https://www.douglas-parker.com, https://git.douglas-parker.com/douglasparker\n""")
-
-        parser = argparse.ArgumentParser(description="Media Server Toolbox provides a set of utilities that are useful for maintaining your media server.", formatter_class=argparse.RawTextHelpFormatter)
-        parser.add_argument("module", type=str, help="""The module that you'd like to run from the toolbox.
-
-stats - Output statistics about your media library
-repair - Repair file permissions for your media library""")
-        parser.add_argument("-a", "--application", metavar="{PLEX,EMBY,JELLYFIN}", type=str, default="plex", choices=["plex", "emby", "jellyfin"], help="Choose the media server you want to pull data from.")
-        parser.add_argument("-t", "--test", metavar="BOOL", type=bool, default=True, help="This is just a argument for debugging purposes.")
-        parser.add_argument("-v", "--verbose", action="store_true", help="Enable verbose output for more technical information.")
-        parser.add_argument("-V", "--version", metavar="", type=bool, help="")
-        args = parser.parse_args()
-
-        if(args.module == "stats"):
+https://www.douglas-parker.com, https://git.douglas-parker.com/douglasparker\n""")
+        
+        if(sys.argv[1] == "stats"):
             if(stats().get_stats(args, PATH_LIBRARY_DB)):
                 sys.exit(0)
             else:
                 print("There was an error when using this module.")
                 sys.exit(1)
         
-        elif(args.module == "repair"):
+        elif(sys.argv[1] == "repair"):
             repair().file_permissions()
 
         elif(len(sys.argv) < 2 or sys.argv[1] == "--help" or sys.argv[1] == "-h"):
@@ -55,8 +44,8 @@ repair - Repair file permissions for your media library""")
 
 usage: {sys.argv[0]} <service> <--argument, -a>
 
-{sys.argv[0]} stats                                         Output statistics about your media library
-{sys.argv[0]} repair                                        Repair file permissions for your media library
+{sys.argv[0]} stats --application, -a plex,emby,jellyfin    Output statistics about your media library
+{sys.argv[0]} repair --repair-file-permissions              Repair file permissions for your media library
 {sys.argv[0]} --version, -V                                 Output the {self.name} version number.
 {sys.argv[0]} --help, -h                                    Output this help message.
 """)
