@@ -31,7 +31,7 @@ class stats:
             for file in files:
                 if(file.endswith(".srt")): subtitles += 1
 
-        print("[Subtitles] {subtitles} items")
+        print(f"[Subtitles] {subtitles} items\n")
 
         print("Runtime Statistics")
         print("------------------")
