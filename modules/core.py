@@ -30,7 +30,8 @@ class stats:
         for root, dirs, files in os.walk("/storage/media"):
             for file in files:
                 if(file.endswith(".srt")): subtitles += 1
-
+                
+        subtitles = str(locale.format_string("%d", subtitles, grouping=True))
         print(f"[Subtitles] {subtitles} items\n")
 
         print("Runtime Statistics")
