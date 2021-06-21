@@ -24,15 +24,24 @@ class stats:
             LEFT JOIN library_sections l ON l.id = m.library_section_id  \
             WHERE library_section_id > 0 GROUP BY name );")
         for i in db.fetchall():
-            print("[" + str(i[0]) + "] " + str(locale.format_string("%d", i[1], grouping=True)) + " items")
+            if(str(i[0]) == "Movies"):
+                print(str(i[0]) + ": " + str(locale.format_string("%d", i[1], grouping=True)) + " movies")
+            elif(str(i[0]) == "TV Shows"):
+                print(str(i[0]) + ": " + str(locale.format_string("%d", i[1], grouping=True)) + " episodes")
+            elif(str(i[0]) == "Anime"):
+                print(str(i[0]) + ": " + str(locale.format_string("%d", i[1], grouping=True)) + " episodes")
+            elif(str(i[0]) == "Music"):
+                print(str(i[0]) + ": " + str(locale.format_string("%d", i[1], grouping=True)) + " tracks")
+            else:
+                print(str(i[0]) + ": " + str(locale.format_string("%d", i[1], grouping=True)) + " items")
         
         subtitles = 0
         for root, dirs, files in os.walk("/storage/media"):
             for file in files:
                 if(file.endswith(".srt")): subtitles += 1
-                
+
         subtitles = str(locale.format_string("%d", subtitles, grouping=True))
-        print(f"[Subtitles] {subtitles} items\n")
+        print(f"Subtitles: {subtitles} subtitles\n")
 
         print("Runtime Statistics")
         print("------------------")
