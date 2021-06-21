@@ -27,7 +27,7 @@ class stats:
             print("[" + str(i[0]) + "] " + str(locale.format_string("%d", i[1], grouping=True)) + " items")
         
         subtitles = 0
-        for files in os.walk("/storage/media"):
+        for root, dirs, files in os.walk("/storage/media"):
             for file in files:
                 if(file.endswith(".srt")): subtitles += 1
 
