@@ -25,7 +25,13 @@ class stats:
             WHERE library_section_id > 0 GROUP BY name );")
         for i in db.fetchall():
             print("[" + str(i[0]) + "] " + str(locale.format_string("%d", i[1], grouping=True)) + " items")
-        print("\n")
+        
+        subtitles = 0
+        for files in os.walk("/storage/media"):
+            for file in files:
+                if(file.endswith(".srt")): subtitles += 1
+
+        print("[Subtitles] {subtitles} items")
 
         print("Runtime Statistics")
         print("------------------")
