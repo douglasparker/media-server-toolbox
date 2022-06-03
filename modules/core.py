@@ -74,13 +74,13 @@ class stats:
         db.execute("SELECT count(*) FROM directories WHERE deleted_at is not null")
         print(str(locale.format_string("%d", db.fetchone()[0], grouping=True)) + " directories marked as deleted.")
 
-        db.execute("select count(*) from metadata_items meta join media_items media on media.metadata_item_id = meta.id join media_parts part on part.media_item_id = media.id where part.extra_data not like '%deepAnalysisVersion=4%' and meta.metadata_type in (1, 4, 12) and part.file != '';")
+        db.execute("select count(*) from metadata_items meta join media_items media on media.metadata_item_id = meta.id join media_parts part on part.media_item_id = media.id where part.extra_data not like '%deepAnalysisVersion=6%' and meta.metadata_type in (1, 4, 12) and part.file != '';")
         print(str(locale.format_string("%d", db.fetchone()[0], grouping=True)) + " files missing deep analysation info.\n")
 
         if(VERBOSE):
             print("Report for Missing Deep Analysation Info:")
             print("-----------------------------------------")
-            db.execute("select meta.id,title from metadata_items meta join media_items media on media.metadata_item_id = meta.id join media_parts part on part.media_item_id = media.id where part.extra_data not like '%deepAnalysisVersion=4%' and meta.metadata_type in (1, 4, 12) and part.file != '';")
+            db.execute("select meta.id,title from metadata_items meta join media_items media on media.metadata_item_id = meta.id join media_parts part on part.media_item_id = media.id where part.extra_data not like '%deepAnalysisVersion=6%' and meta.metadata_type in (1, 4, 12) and part.file != '';")
             for media in db.fetchall():
                 print(str(media[0]) + ":" + media[1])
             
