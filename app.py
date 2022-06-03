@@ -8,7 +8,7 @@ import os
 import sys
 from modules.core import repair, stats
 
-PATH_LIBRARY_DB = "/var/lib/plexmediaserver/Library/Application Support/Plex Media Server/Plug-in Support/Databases/com.plexapp.plugins.library.db"
+PATH_LIBRARY_DB = "/opt/plex/Library/Application Support/Plex Media Server/Plug-in Support/Databases/com.plexapp.plugins.library.db"
 
 class application:
     name = "Media Server Toolbox"
