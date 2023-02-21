@@ -36,7 +36,7 @@ class stats:
                 print(str(i[0]) + ": " + str(locale.format_string("%d", i[1], grouping=True)) + " items")
         
         subtitles = 0
-        for root, dirs, files in os.walk("/storage/media"):
+        for root, dirs, files in os.walk("/mnt/media"):
             for file in files:
                 if(file.endswith(".srt")): subtitles += 1
 
@@ -90,11 +90,11 @@ class stats:
 class repair:
     def file_permissions(self):
         libraries = [
-            "/storage/media/movies",
-            "/storage/media/tv-shows",
-            "/storage/media/anime",
-            "/storage/media/music",
-            "/storage/media/books",
+            "/mnt/media/movies",
+            "/mnt/media/tv-series",
+            "/mnt/media/anime",
+            "/mnt/media/music",
+            "/mnt/media/books",
         ]
         for library in libraries:
             if(os.path.exists(library)):
