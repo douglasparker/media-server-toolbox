@@ -74,10 +74,10 @@ class stats:
         print(str(locale.format_string("%d", db.fetchone()[0], grouping=True)) + " files missing bitrate analyzation info.")
 
         db.execute("SELECT COUNT(*) FROM media_items WHERE media_analysis_version != 6;")
-        print(str(locale.format_string("%d", db.fetchone()[0], grouping=True)) + " files missing analysation info.\n")
+        print(str(locale.format_string("%d", db.fetchone()[0], grouping=True)) + " files missing analysation info.")
 
         db.execute("SELECT COUNT(*) FROM media_parts WHERE extra_data NOT LIKE '%deepAnalysisVersion=6%' AND file != '';")
-        print(str(locale.format_string("%d", db.fetchone()[0], grouping=True)) + " files missing deep analysation info.\n")
+        print(str(locale.format_string("%d", db.fetchone()[0], grouping=True)) + " files missing deep analysation info.")
 
         db.execute("SELECT COUNT(*) FROM media_parts WHERE deleted_at IS NOT NULL")
         print(str(locale.format_string("%d", db.fetchone()[0], grouping=True)) + " media_parts marked as deleted.")
