@@ -64,7 +64,7 @@ class stats:
 
         db.execute("SELECT COUNT(*) FROM media_parts WHERE extra_data NOT LIKE '%intros=%' AND file != '';")
         missing_intro_detection = db.fetchone()[0]
-        print(missing_intro_detection + " files are missing intro detection markers.")
+        print(str(missing_intro_detection) + " files are missing intro detection markers.")
 
         db.execute("SELECT COUNT(*) FROM media_parts WHERE extra_data NOT LIKE '%credits=%' AND file != '';")
         missing_intro_detection = db.fetchone()[0]
