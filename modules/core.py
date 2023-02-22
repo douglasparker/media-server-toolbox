@@ -68,7 +68,7 @@ class stats:
 
         db.execute("SELECT COUNT(*) FROM media_parts WHERE extra_data NOT LIKE '%credits=%' AND file != '';")
         missing_intro_detection = db.fetchone()[0]
-        print(missing_intro_detection + " files are missing credit detection markers.")
+        print(str(missing_intro_detection) + " files are missing credit detection markers.")
 
         db.execute("SELECT COUNT(*) FROM media_items WHERE bitrate IS NULL")
         print(str(locale.format_string("%d", db.fetchone()[0], grouping=True)) + " files missing bitrate analyzation info.")
