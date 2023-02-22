@@ -30,7 +30,7 @@ __  __        _ _        ___                        _____         _ _
 """)
         print("Media Server Toolbox")
         print("""Copyright 2020-""" + str(datetime.now().year) + """, Douglas Parker
-https://www.douglas-parker.com, https://github.com/douglasparker\n""")
+https://douglasparker.dev, https://douglasparker.dev/douglasparker\n""")
         
         if(len(sys.argv) <= 1 or sys.argv[1] == "--help" or sys.argv[1] == "-h"):
             print(f"""
